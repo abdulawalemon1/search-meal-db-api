@@ -16,11 +16,16 @@
     <main class="container">
         <h1 class="text-center text-warning">Meal DB</h1>
         <h2 class="text-center text-warning">Search Your Favourite Food</h2>
+        <!-- meal search area -->
         <div class="input-group mb-3 w-50 mx-auto">
             <input id="search-field" type="text" class="form-control" placeholder="Search the food you want..."
                 aria-label="Recipient's username" aria-describedby="button-addon2">
             <button onclick="searchFood()" class="btn btn-outline-warning" type="button"
                 id="button-search">Search</button>
+        </div>
+        <!-- meal serach result -->
+        <div id="search-result" class="row row-cols-1 row-cols-md-3 g-4">
+
         </div>
     </main>
 
