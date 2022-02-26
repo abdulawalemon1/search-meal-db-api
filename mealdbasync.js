@@ -30,24 +30,26 @@ const displaySearchResult = meals => {
     //clear data
     searchResult.textContent = '';
     if (meals.length == 0) {
+        console.log('Meal not found')
+    } else {
+        meals.forEach(meal => {
+            // console.log(meal);
+            const div = document.createElement('div');
+            div.classList.add('col');
+            div.innerHTML = `
+            <div onclick="loadMealDetail(${meal.idMeal})" class="card h-100">
+                    <img src="${meal.strMealThumb}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                            <h5 class="card-title">${meal.strMeal}</h5>
+                            <p class="card-text">${meal.strInstructions.slice(0, 500)}</p>
+                    </div>
+            `;
+            searchResult.appendChild(div);
 
+        })
     }
-    meals.forEach(meal => {
-        // console.log(meal);
-        const div = document.createElement('div');
-        div.classList.add('col');
-        div.innerHTML = `
-        <div onclick="loadMealDetail(${meal.idMeal})" class="card h-100">
-                <img src="${meal.strMealThumb}" class="card-img-top" alt="...">
-                <div class="card-body">
-                        <h5 class="card-title">${meal.strMeal}</h5>
-                        <p class="card-text">${meal.strInstructions.slice(0, 500)}</p>
-                </div>
-        `;
-        searchResult.appendChild(div);
-
-    })
-}//async and await
+}
+//async and await
 const loadMealDetail = async mealId => {
     const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
     const res = await fetch(url);

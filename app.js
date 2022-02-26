@@ -1,3 +1,4 @@
+document.getElementById('error-message').style.display = 'none';
 const searchFood = () => {
     let searchField = document.getElementById('search-field');
     let searchText = searchField.value;
@@ -5,6 +6,8 @@ const searchFood = () => {
 
     //clear data
     searchField.value = '';
+    //error message hidden
+    document.getElementById('error-message').style.display = 'none';
     if (searchText == '') {
         //please write something to display
     }
@@ -12,12 +15,20 @@ const searchFood = () => {
         //load data
         const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`
 
-        fetch(url)
-            .then(res => res.json())
-            .then(data => displaySearchResult(data.meals))
+        try {
+            fetch(url)
+                .then(res => res.json())
+                .then(data => displaySearchResult(data.meals))
+
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
 
-
+}
+const displayError = error => {
+    document.getElementById('error-message').style.display = 'block';
 }
 
 const displaySearchResult = meals => {
